@@ -18,38 +18,42 @@ typedef struct Encadeado encad;
 
 encad *temp, *Cabeca, *temp1, *Sequencia;
 int dado, x=1, w=1, valor;
-int Ler();
+void Ler();
 
 
 void AlocaValor(encad *ale, int valor){
     ale = (encad *) malloc(sizeof(encad));
-    ale->dado = valor , ale->prox = NULL, temp1 = ale;
+    ale->dado = valor , ale->prox = NULL;
 }
 
-void InsereLista(encad *ale1,int dado){
-    AlocaValor(ale1, dado);
+void SalvaSequencia(encad *ale2, int valor1){
+    AlocaValor(ale2, valor1);
+    Cabeca->prox = ale2;
+    temp = Cabeca->prox;
+}
+
+void SalvaSequencia1(encad *ale2, int valor1){
+    AlocaValor(ale2, valor1);
+    temp->prox = ale2;
+    temp = ale2;
+}
+void EscolheFunc(int x){
     if (x==1){
-        Cabeca->prox = temp1;
-        temp = Cabeca->prox;
-    }
-    else if (x==2){
-        temp->prox = temp1;
+        SalvaSequencia(Sequencia, dado);
     }
     else{
-        temp = temp->prox;
-        temp->prox = temp1;
+        SalvaSequencia1(Sequencia, dado);
     }
 }
 
 void ConfereValor(int dado){
-    if(x!=1){
-        if (temp->dado==temp1->dado){
-            temp->prox = NULL;
-            printf("\nValor ja utilizado\n");
-            Ler();
+    if (temp->dado==temp1->dado){
+        temp->prox = NULL;
+        printf("\nValor ja utilizado\n");
+        Ler();
         }
-    }
 }
+
 void PrintDaLista(encad *encad){
     temp=encad->prox;
     while(temp!=NULL){
@@ -61,8 +65,8 @@ void PrintDaLista(encad *encad){
 void ReproduzirSequencias(encad *Cabeca1){
     while (w<11){
         printf("\n\nSequencia %d: \n",w);
-        srand((unsigned)time(NULL));
         while(temp!=NULL){
+            srand((unsigned)time(NULL));
             if(temp->dado<6){
                 valor = temp->dado - temp->dado + 1 + (rand()%10);
                 printf("%d\n", valor);
@@ -82,23 +86,24 @@ void ReproduzirSequencias(encad *Cabeca1){
         w++;
     }
 }
-int Ler(){
-    Cabeca = (encad *) malloc(sizeof(encad));
-    Cabeca->prox = NULL;
+void Ler(){
     if (x<7){
         printf("Digite o valor %d da aposta: ", x);
         scanf("%d", &dado);
-        InsereLista(Sequencia, dado);
-        ConfereValor(dado);
+        EscolheFunc(x);
+        if (x!=1){
+            ConfereValor(dado);
+        }
         x++;
         Ler();
     }
-    return 0;
+    
 }
 
-//caio arthur sales telles
 
 int main() {
+    Cabeca = (encad *) malloc(sizeof(encad));
+    Cabeca->prox = NULL;
     Ler();
     PrintDaLista(Cabeca);
     temp=Cabeca->prox;
