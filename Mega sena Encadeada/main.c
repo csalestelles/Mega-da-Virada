@@ -85,13 +85,13 @@ void ReproduzirSequencias(node *Cabeca){
         while(temp!=NULL){
             if(temp->num < 6){
                 srand((unsigned)time(NULL));
-                valor = temp->num - temp->num + 1 + (rand()%10);
+                valor = temp->num - temp->num + 1 + (rand()%20);
                 printf("%d\n", valor);
                 temp = temp->prox;
             }
             if(temp->num > 55){
                 srand((unsigned)time(NULL));
-                valor = temp->num - 4 + (rand()%8);
+                valor = temp->num - 16 + (rand()%16);
                 printf("%d\n", valor);
                 temp = temp->prox;
             }
