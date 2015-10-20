@@ -6,53 +6,70 @@
 //  Copyright © 2015 Caio Arthur. All rights reserved.
 //
 
+//Definicao das Variaveis globais
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-struct Encadeado{
-    int dados;
-    struct Encadeado *prox;
+struct Node{
+    int num;
+    struct Node *prox;
 };
-typedef struct Encadeado encad;
+typedef struct Node node;
 
-//Definicao das Variaveis globais
-encad *temp , *temp1, *Cabeca;
+node *temp, *temp1;
 int dado, x=1, w=1, valor;
 void Ler();
 
 
-void AlocaValor(encad *aleatorio, int inteiro){
-    aleatorio = (encad *) malloc(sizeof(encad));
-    aleatorio->dados = inteiro , aleatorio->prox = NULL;
+void AlocaValor(node *aleatorio, int inteiro){
+    aleatorio = (node *) malloc(sizeof(node));
+    aleatorio->num = inteiro , aleatorio->prox = NULL;
 }
 
-void SalvaSequencia(encad *ale2, int valor1){
-    AlocaValor(ale2, valor1);
-    Cabeca->prox = ale2;
-    temp = Cabeca->prox;
+int vazia(node *LISTA)
+{
+    if(LISTA->prox == NULL)
+        return 1;
+    else
+        return 0;
 }
 
-void SalvaSequencia1(encad *ale2, int valor2){
-    AlocaValor(ale2, valor2);
-    temp->prox = ale2;
-    temp = ale2;
-}
-void EscolheFunc(int x){
-    if (x==1){
-        encad *Sequencia;
-        SalvaSequencia(Sequencia, dado);
+node *LISTA;
+
+void Insere(node *LISTA, int valor)
+{
+    node *novo=(node *) malloc(sizeof(node));
+    novo->num = valor;
+    novo->prox = NULL;
+    
+    if(vazia(LISTA)){
+        LISTA->prox=novo;
     }
     else{
-        encad *Sequencia1;
-        SalvaSequencia1(Sequencia1, dado);
+        node *tmp = LISTA->prox;
+        while(tmp->prox != NULL){
+            tmp = tmp->prox;
+        }
+        tmp->prox = novo;
     }
+}
+
+void Imprime(node *LISTA){
+    temp = LISTA->prox;
+    while (temp!=NULL) {
+        printf("\n%d\n", temp->num);
+        temp=temp->prox;
+    }
+    
 }
 
 void ConfereValor(int dado){
-    temp = Cabeca->prox;
+    temp = LISTA->prox;
     while(temp->prox != NULL){
-        if (dado==temp->dados)
+        if (dado==temp->num)
         {
             printf("\nValor já inserido\n");
             Ler();
@@ -61,31 +78,24 @@ void ConfereValor(int dado){
     }
 }
 
-void PrintDaLista(encad *encad){
-    temp=encad->prox;
-    while(temp!=NULL){
-        printf("%d", temp->dados);
-        temp=temp->prox;
-    }
-}
 
-void ReproduzirSequencias(encad *Cabeca1){
+void ReproduzirSequencias(node *Cabeca){
     while (w<11){
         printf("\n\nSequencia %d: \n",w);
         while(temp!=NULL){
             srand((unsigned)time(NULL));
-            if(temp->dados<6){
-                valor = temp->dados - temp->dados + 1 + (rand()%10);
+            if(temp->num < 6){
+                valor = temp->num - temp->num + 1 + (rand()%10);
                 printf("%d\n", valor);
                 temp = temp->prox;
             }
-            if(temp->dados>55){
-                valor = temp->dados - 4 + (rand()%8);
+            if(temp->num > 55){
+                valor = temp->num - 4 + (rand()%8);
                 printf("%d\n", valor);
                 temp = temp->prox;
             }
             else{
-                valor = temp->dados - 5 + (rand()%11);
+                valor = temp->num - 5 + (rand()%11);
                 printf("%d\n", valor);
                 temp = temp->prox;
             }
@@ -100,20 +110,22 @@ void Ler(){
         if (x!=1){
             ConfereValor(dado);
         }
-        EscolheFunc(x);
-        x++;
-        Ler();
+        else{
+            Insere(LISTA, dado);
+            x++;
+            Ler();
+            }
     }
     
 }
 
 
 int main() {
-    Cabeca = (encad *) malloc(sizeof(encad));
+    LISTA = (node *) malloc(sizeof(node));
+    LISTA->prox = NULL;
     printf("Digite os valores da aposta: \n");
     Ler();
-    PrintDaLista(Cabeca);
-    temp=Cabeca->prox;
-    ReproduzirSequencias(Cabeca);
+    temp=LISTA->prox;
+    ReproduzirSequencias(LISTA);
     return 0;
 }

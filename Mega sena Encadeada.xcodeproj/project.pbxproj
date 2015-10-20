@@ -235,6 +235,7 @@
 				CD83C5801BB0E018006532B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
