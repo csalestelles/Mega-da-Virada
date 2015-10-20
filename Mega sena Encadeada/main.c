@@ -24,11 +24,6 @@ int dado, x=1, w=1, valor;
 void Ler();
 
 
-void AlocaValor(node *aleatorio, int inteiro){
-    aleatorio = (node *) malloc(sizeof(node));
-    aleatorio->num = inteiro , aleatorio->prox = NULL;
-}
-
 int vazia(node *LISTA)
 {
     if(LISTA->prox == NULL)
@@ -68,13 +63,17 @@ void Imprime(node *LISTA){
 
 void ConfereValor(int dado){
     temp = LISTA->prox;
-    while(temp->prox != NULL){
+    if (dado<0 | dado>60){
+        printf("\nValor fora da área de marcação\n");
+        Ler();
+    }
+    while(temp != NULL){
         if (dado==temp->num)
         {
             printf("\nValor já inserido\n");
             Ler();
         }
-        temp = temp->prox;
+        else{temp = temp->prox;}
     }
 }
 
@@ -82,39 +81,39 @@ void ConfereValor(int dado){
 void ReproduzirSequencias(node *Cabeca){
     while (w<11){
         printf("\n\nSequencia %d: \n",w);
+        srand((unsigned)time(NULL));
         while(temp!=NULL){
-            srand((unsigned)time(NULL));
             if(temp->num < 6){
+                srand((unsigned)time(NULL));
                 valor = temp->num - temp->num + 1 + (rand()%10);
                 printf("%d\n", valor);
                 temp = temp->prox;
             }
             if(temp->num > 55){
+                srand((unsigned)time(NULL));
                 valor = temp->num - 4 + (rand()%8);
                 printf("%d\n", valor);
                 temp = temp->prox;
             }
             else{
+                srand((unsigned)time(NULL));
                 valor = temp->num - 5 + (rand()%11);
                 printf("%d\n", valor);
                 temp = temp->prox;
             }
         }
         w++;
+        temp = LISTA->prox;
     }
 }
 void Ler(){
     if (x<7){
         printf("\n%d :     ", x);
         scanf("%d", &dado);
-        if (x!=1){
-            ConfereValor(dado);
-        }
-        else{
-            Insere(LISTA, dado);
-            x++;
-            Ler();
-            }
+        ConfereValor(dado);
+        Insere(LISTA, dado);
+        x++;
+        Ler();
     }
     
 }
