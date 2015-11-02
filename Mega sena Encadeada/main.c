@@ -79,24 +79,22 @@ void ConfereValor(int dado){
 
 
 void ReproduzirSequencias(node *Cabeca){
-    while (w<11){
+    while (w<3){
         printf("\n\nSequencia %d: \n",w);
-        srand((unsigned)time(NULL));
+        srand( time(NULL));
         while(temp!=NULL){
-            if(temp->num < 6){
-                srand((unsigned)time(NULL));
+            srand( time(NULL));
+            if(temp->num < 10){
                 valor = temp->num - temp->num + 1 + (rand()%20);
                 printf("%d\n", valor);
                 temp = temp->prox;
             }
-            if(temp->num > 55){
-                srand((unsigned)time(NULL));
-                valor = temp->num - 16 + (rand()%16);
+            else if(temp->num > 55){
+                valor = temp->num - 15 + (rand()%15);
                 printf("%d\n", valor);
                 temp = temp->prox;
             }
             else{
-                srand((unsigned)time(NULL));
                 valor = temp->num - 5 + (rand()%11);
                 printf("%d\n", valor);
                 temp = temp->prox;
