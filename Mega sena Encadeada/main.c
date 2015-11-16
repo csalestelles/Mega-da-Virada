@@ -32,7 +32,7 @@ int vazia(node *LISTA)
         return 0;
 }
 
-node *LISTA;
+node *LISTA, *listarep;
 
 void Insere(node *LISTA, int valor)
 {
@@ -77,33 +77,52 @@ void ConfereValor(int dado){
     }
 }
 
+int Num(int x){
+    return rand()%x;
+}
+
+void GeraAleatorio(int inserido){
+    if (inserido < 10){
+        valor = 1 + Num(20);
+    }
+    else if (inserido > 55){
+        valor = inserido - 15 + Num(20);
+        if (valor > 60) {
+            valor = 60 - Num(10);
+        }
+    }
+    else{
+        valor = inserido - 5 + Num(15);
+    }
+}
+
+void ConfereValor2(int dado){
+    temp1 = listarep->prox;
+    while(temp != NULL){
+        if (dado==temp1->num)
+        {
+            GeraAleatorio(dado);
+        }
+        else{temp = temp1->prox;}
+    }
+}
+
 
 void ReproduzirSequencias(node *Cabeca){
     while (w<3){
         printf("\n\nSequencia %d: \n",w);
-        srand( time(NULL));
         while(temp!=NULL){
-            srand( time(NULL));
-            if(temp->num < 10){
-                valor = temp->num - temp->num + 1 + (rand()%20);
-                printf("%d\n", valor);
-                temp = temp->prox;
-            }
-            else if(temp->num > 55){
-                valor = temp->num - 15 + (rand()%15);
-                printf("%d\n", valor);
-                temp = temp->prox;
-            }
-            else{
-                valor = temp->num - 5 + (rand()%11);
-                printf("%d\n", valor);
-                temp = temp->prox;
-            }
+            GeraAleatorio(temp->num);
+            ConfereValor2(valor);
+            Insere(listarep, valor);
+            printf("%d\n", valor);
+            temp = temp->prox;
         }
         w++;
         temp = LISTA->prox;
     }
 }
+
 void Ler(){
     if (x<7){
         printf("\n%d :     ", x);
@@ -115,11 +134,17 @@ void Ler(){
     }
     
 }
-
+void IniciaLista(node *listas){
+    listas = (node *) malloc(sizeof(node));
+    listas->prox = NULL;
+}
 
 int main() {
     LISTA = (node *) malloc(sizeof(node));
     LISTA->prox = NULL;
+    listarep = (node *) malloc(sizeof(node));
+    listarep->prox = NULL;
+    srand((unsigned) time(NULL));
     printf("Digite os valores da aposta: \n");
     Ler();
     temp=LISTA->prox;
