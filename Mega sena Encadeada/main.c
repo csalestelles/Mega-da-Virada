@@ -1,12 +1,9 @@
-//
-//  main.c
-//  Mega sena Encadeada
-//
-//  Created by Caio Arthur on 21/09/15.
+
+//                                                 Gerador de jogos da Mega sena
+
+//  Created by Caio Arthur.
 //  Copyright © 2015 Caio Arthur. All rights reserved.
 //
-
-//Definicao das Variaveis globais
 
 
 #include <stdio.h>
