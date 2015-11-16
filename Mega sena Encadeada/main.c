@@ -98,12 +98,12 @@ void GeraAleatorio(int inserido){
 
 void ConfereValor2(int dado){
     temp1 = listarep->prox;
-    while(temp != NULL){
+    while(temp1 != NULL){
         if (dado==temp1->num)
         {
             GeraAleatorio(dado);
         }
-        else{temp = temp1->prox;}
+        else{temp1 = temp1->prox;}
     }
 }
 
