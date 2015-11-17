@@ -93,7 +93,7 @@ void GeraAleatorio(int inserido){
     }
 }
 
-void ConfereValor2(int dado){
+int ConfereValor2(int dado){
     temp1 = listarep->prox;
     while(temp1 != NULL){
         if (dado==temp1->num)
@@ -102,6 +102,7 @@ void ConfereValor2(int dado){
         }
         else{temp1 = temp1->prox;}
     }
+    return dado;
 }
 
 
@@ -110,13 +111,15 @@ void ReproduzirSequencias(node *Cabeca){
         printf("\n\nSequencia %d: \n",w);
         while(temp!=NULL){
             GeraAleatorio(temp->num);
-            ConfereValor2(valor);
-            Insere(listarep, valor);
+            Insere(listarep, ConfereValor2(valor));
             printf("%d\n", valor);
             temp = temp->prox;
         }
         w++;
         temp = LISTA->prox;
+        if (w>1){
+            listarep->prox = NULL;
+        }
         temp1 = listarep->prox;
     }
 }
@@ -130,8 +133,8 @@ void Ler(){
         x++;
         Ler();
     }
-    
 }
+
 void IniciaLista(node *listas){
     listas = (node *) malloc(sizeof(node));
     listas->prox = NULL;
