@@ -106,7 +106,7 @@ void ConfereValor2(int dado){
 
 
 void ReproduzirSequencias(node *Cabeca){
-    while (w<3){
+    while (w<11){
         printf("\n\nSequencia %d: \n",w);
         while(temp!=NULL){
             GeraAleatorio(temp->num);
@@ -117,6 +117,7 @@ void ReproduzirSequencias(node *Cabeca){
         }
         w++;
         temp = LISTA->prox;
+        temp1 = listarep->prox;
     }
 }
 
