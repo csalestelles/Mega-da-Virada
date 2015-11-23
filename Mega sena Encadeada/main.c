@@ -80,17 +80,19 @@ int Num(int x){
 
 void GeraAleatorio(int inserido){
     if (inserido < 10){
-        valor = 1 + Num(20);
+        valor = 1 + Num(25) - Num(20);
     }
     else if (inserido > 55){
-        valor = inserido - 15 + Num(20);
-        if (valor > 60) {
-            valor = 60 - Num(10);
-        }
-    }
+        valor = inserido - 15 + Num(30) - Num(25);
+            }
     else{
-        valor = inserido - 5 + Num(15);
+        valor = inserido - 10 + Num(30) - Num(20);
     }
+    if (valor > 60 || valor<1) {
+        int novoinserido = valor;
+        GeraAleatorio(novoinserido);
+    }
+
 }
 
 int ConfereValor2(int dado){
@@ -107,7 +109,7 @@ int ConfereValor2(int dado){
 
 
 void ReproduzirSequencias(node *Cabeca){
-    while (w<11){
+    while (w<7){
         printf("\n\nSequencia %d: \n",w);
         while(temp!=NULL){
             GeraAleatorio(temp->num);
