@@ -88,7 +88,7 @@ void GeraAleatorio(int inserido){
     else{
         valor = inserido - 10 + Num(30) - Num(20);
     }
-    if (valor > 60 || valor<1) {
+    if (valor > 60 | valor<1) {
         int novoinserido = valor;
         GeraAleatorio(novoinserido);
     }
